@@ -103,12 +103,26 @@
       result = []
       
       for i in 0...self.length do
-        result << yield(self[i]) 
+        result << proc.call(self[i]) 
 
       end
      result
     end
 
+    def my_inject
+      accumulator = self[0]
+      for i in 1...self.length do
+        accumulator =  yield(accumulator,self[i])
+      end
+      accumulator
+    end
+
   end
 
-puts [1,2,3,4,5].my_map {|x| x**2}
+  def multiply_els(user_input)
+    user_input.my_inject{|x,y| x*y}
+  end
+
+test_map = Proc.new{|x| x**2}
+
+puts [1,4,6,7].my_map(&test_map)
