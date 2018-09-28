@@ -30,17 +30,49 @@
       end
      result
     end
+
+    def my_all?
+      for i in 0...self.length do
+        if yield(self[i]) == false
+          return false
+        end
+      end
+      return true
+    end
     
+    def my_any?
+      for i in 0...self.length do
+        if yield(self[i]) == true
+          return true
+        end
+      end
+      return false
+    end
+
+    def my_none?
+      for i in 0...self.length do
+        if yield(self[i]) == false
+        else
+          return false
+        end
+      end
+     return true
+    end
+
+    def my_count
+     if block_given?
+      counter = 0
+      for i in 0...self.length do
+        if yield(self[i]) == true
+        counter+= 1
+        end
+      end
+      counter
+    else
+      self.size
+    end
+    end
+
   end
 
-
-
-
-tester = [1, 2, 3, 10, 22, 11, 54, 99]
-
-
-even = tester.my_select do |x| x % 2 == 0 end
-
-puts even
-
-puts tester
+puts [1,5,4].my_count
