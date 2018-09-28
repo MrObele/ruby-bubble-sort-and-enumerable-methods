@@ -32,47 +32,73 @@
     end
 
     def my_all?
-      for i in 0...self.length do
-        if yield(self[i]) == false
-          return false
+
+      if block_given?
+        for i in 0...self.length do
+        
+          if yield(self[i]) == false
+            return false
+          end
+
         end
-      end
+        return true
+      else
+        self.my_each { |x|
+        return false if (x && true) != true
+      }
       return true
+      end
+    
     end
     
     def my_any?
-      for i in 0...self.length do
-        if yield(self[i]) == true
-          return true
+
+      if block_given?
+        for i in 0...self.length do
+          if yield(self[i]) == true
+            return true
+          end
         end
+          return false
+      else
+        self.my_each { |x|
+          return true if (x && true) == true
+        }
+        return false
       end
-      return false
     end
 
     def my_none?
-      for i in 0...self.length do
-        if yield(self[i]) == false
-        else
-          return false
+      if block_given?
+        for i in 0...self.length do
+          if yield(self[i]) == false
+          else
+            return false
+          end
         end
+        return true
+      else
+        self.my_each { |x|
+        return false if (false && x) != false
+      }
+      return true
       end
-     return true
     end
 
     def my_count
-     if block_given?
-      counter = 0
-      for i in 0...self.length do
-        if yield(self[i]) == true
-        counter+= 1
+      if block_given?
+        counter = 0
+        for i in 0...self.length do
+          if yield(self[i]) == true
+            counter+= 1
+          end
         end
+        counter
+      else
+        self.size
       end
-      counter
-    else
-      self.size
-    end
     end
 
   end
 
-puts [1,5,4].my_count
+puts [false, false, false, false].my_none?
