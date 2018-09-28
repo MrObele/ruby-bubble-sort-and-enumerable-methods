@@ -99,6 +99,16 @@
       end
     end
 
+    def my_map
+      result = []
+      
+      for i in 0...self.length do
+        result << yield(self[i]) 
+
+      end
+     result
+    end
+
   end
 
-puts [false, false, false, false].my_none?
+puts [1,2,3,4,5].my_map {|x| x**2}
