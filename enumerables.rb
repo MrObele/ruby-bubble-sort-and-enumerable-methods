@@ -3,28 +3,29 @@
 
 
     def my_each
+      result = []
       for i in 0...self.length do
-        yield(self[i])
+        result << yield(self[i])
       end
-      
+      result
     end
 
     def my_each_with_index
-
+        result = []
       for i in 0...self.length do
-        yield(self[i], i)
+        result << yield(self[i], i)
       end
-      
+      result
     end
 
 
     def my_select
       result = []
-      
+
       for i in 0...self.length do
     if yield(self[i]) == true
 
-      result << self[i] 
+      result << self[i]
 
     end
       end
@@ -35,7 +36,7 @@
 
       if block_given?
         for i in 0...self.length do
-        
+
           if yield(self[i]) == false
             return false
           end
@@ -48,9 +49,9 @@
       }
       return true
       end
-    
+
     end
-    
+
     def my_any?
 
       if block_given?
@@ -102,15 +103,15 @@
     def my_map(proc = false)
       result = []
       if proc
-      
+
         for i in 0...self.length do
-          result << proc.call(self[i]) 
+          result << proc.call(self[i])
 
         end
         result
       else
         for i in 0...self.length do
-          result << yield(self[i]) 
+          result << yield(self[i])
 
         end
         result
