@@ -138,6 +138,6 @@
 
 
 
-test_map = Proc.new{|x| x**2}
+# test_map = Proc.new{|x| x**2}
 
-puts [1,4,6,7].my_map(&test_map )
+# puts [1,4,6,7].my_map(&test_map )
